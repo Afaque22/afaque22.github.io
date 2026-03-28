@@ -1053,8 +1053,7 @@
         <strong>Google Play</strong> and <strong>App Store</strong>.
       </p>
       <div class="hero-cta reveal reveal-delay-3">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=afaque.memon22@gmail.com&su=Project Inquiry&body=Hi%2C%0A%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.%0A%0AThanks"
-          class="btn btn-primary">↗ Get in touch</a>
+        <a id="getInTouchBtn" class="btn btn-primary">↗ Get in touch</a>
         <!-- REPLACE with your real URLs -->
         <a href="https://github.com/Afaque22" target="_blank" class="btn btn-ghost">GitHub</a>
         <a href="https://linkedin.com/in/afaque-memon-7271aa1b3/
@@ -1750,8 +1749,7 @@
           opportunities. Drop me a message — I reply fast.
         </p>
         <div class="contact-links reveal">
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=afaque.memon22@gmail.com&su=Project Inquiry&body=Hi%2C%0A%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.%0A%0AThanks"
-            class="contact-link">✉
+          <a id="emailBtn" class="contact-link">✉
             <span class="__cf_email__"
               data-cfemail="107176716165753e7d757d7f7e222250777d71797c3e737f7d">[email&#160;protected]</span></a>
           <!-- REPLACE with your real URLs -->
@@ -1992,6 +1990,44 @@
       buildDots();
       goTo(0);
     })();
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    const email = "afaque.memon22@gmail.com";
+
+    function openMail(subject, body) {
+      const mobileMail = `mailto:${email}?subject=${subject}&body=${body}`;
+
+      const desktopMail =
+        `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+
+      const url = isMobile ? mobileMail : desktopMail;
+
+      if (isMobile) {
+        window.location.href = url;
+      } else {
+        window.open(url, "_blank");
+      }
+    }
+
+    // Button 1: Get in touch
+    document.getElementById("getInTouchBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+
+      openMail(
+        "Project Inquiry",
+        "Hi,%0AI visited your portfolio and would like to discuss a project.%0A%0AThanks"
+      );
+    });
+
+    // Button 2: Email link
+    document.getElementById("emailBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+
+      openMail(
+        "Hello",
+        "Hi,%0AI came across your portfolio and wanted to connect.%0A%0AThanks"
+      );
+    });
   </script>
 </body>
 
