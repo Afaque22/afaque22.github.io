@@ -1,42 +1,33 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Afaque Ahmed — React Native & Frontend Developer based in Karachi, Pakistan. Building cross-platform iOS & Android apps." />
   <title>Afaque Ahmed — React Native Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #07080d;
-      --bg2: #0d0f17;
-      --bg3: #12141f;
-      --accent: #00f5c8;
+      --bg:      #07080d;
+      --bg2:     #0d0f17;
+      --bg3:     #12141f;
+      --accent:  #00f5c8;
       --accent2: #0099ff;
-      --text: #e8eaf0;
-      --muted: #6b7280;
-      --border: rgba(255, 255, 255, 0.06);
-      --card: rgba(255, 255, 255, 0.03);
+      --text:    #e8eaf0;
+      --muted:   #6b7280;
+      --border:  rgba(255,255,255,0.06);
+      --card:    rgba(255,255,255,0.03);
       --font-display: "Bebas Neue", sans-serif;
-      --font-body: "Outfit", sans-serif;
-      --font-mono: "JetBrains Mono", monospace;
+      --font-body:    "Outfit", sans-serif;
+      --font-mono:    "JetBrains Mono", monospace;
+      --nav-h: 64px;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
 
     body {
       background: var(--bg);
@@ -49,1988 +40,1171 @@
 
     body::before {
       content: "";
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
+      pointer-events: none; z-index: 0; opacity: 0.4;
     }
 
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent);
-      border-radius: 2px;
-    }
-
-    /* NAV */
+    /* ─── NAV ─── */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 1.2rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(7, 8, 13, 0.85);
-      backdrop-filter: blur(16px);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      padding: 0 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(7,8,13,0.88);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
     }
+    nav.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); }
 
     .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--accent);
+      font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent);
+      text-decoration: none; letter-spacing: 0.05em;
     }
 
     .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
+      display: flex; gap: 2rem; list-style: none; align-items: center;
     }
-
     .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-family: var(--font-mono);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      position: relative;
+      color: var(--muted); text-decoration: none;
+      font-size: 0.78rem; font-family: var(--font-mono);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s; position: relative;
     }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .nav-links a.active {
-      color: var(--accent);
-    }
-
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { color: var(--accent); }
     .nav-links a.active::after {
-      content: "";
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 100%;
-      height: 1px;
+      content: ""; position: absolute;
+      bottom: -6px; left: 0; width: 100%; height: 1px;
       background: var(--accent);
     }
 
-    /* HERO */
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer;
+      padding: 4px; z-index: 200;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--text); border-radius: 2px;
+      transition: all 0.3s cubic-bezier(.4,0,.2,1);
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* mobile nav drawer */
+    .mobile-nav {
+      display: none; position: fixed;
+      top: var(--nav-h); left: 0; right: 0; bottom: 0;
+      background: rgba(7,8,13,0.97);
+      backdrop-filter: blur(24px);
+      z-index: 99; flex-direction: column;
+      align-items: center; justify-content: center; gap: 2.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav a {
+      font-family: var(--font-display); font-size: 2.5rem;
+      color: var(--muted); text-decoration: none; letter-spacing: 0.08em;
+      transition: color 0.2s, transform 0.2s;
+      transform: translateY(12px);
+    }
+    .mobile-nav.open a { transform: translateY(0); }
+    .mobile-nav a:hover { color: var(--accent); }
+    .mobile-nav a.active { color: var(--accent); }
+
+    /* ─── HERO ─── */
     #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 8rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
+      min-height: 100svh; display: flex; align-items: center;
+      padding: calc(var(--nav-h) + 4rem) 2rem 4rem;
+      position: relative; overflow: hidden;
     }
-
     .hero-glow {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle,
-          rgba(0, 245, 200, 0.07) 0%,
-          transparent 70%);
-      top: -100px;
-      left: -200px;
-      pointer-events: none;
+      position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,245,200,0.07) 0%, transparent 70%);
+      top: -100px; left: -200px; pointer-events: none;
     }
-
     .hero-glow2 {
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle,
-          rgba(0, 153, 255, 0.05) 0%,
-          transparent 70%);
-      bottom: 0;
-      right: -100px;
-      pointer-events: none;
+      position: absolute; width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,153,255,0.05) 0%, transparent 70%);
+      bottom: 0; right: -100px; pointer-events: none;
     }
-
-    .hero-inner {
-      max-width: 900px;
-      position: relative;
-      z-index: 1;
-    }
+    .hero-inner { max-width: 900px; position: relative; z-index: 1; }
 
     .hero-tag {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      font-family: var(--font-mono); font-size: 0.78rem;
+      color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem;
     }
-
     .hero-tag::before {
-      content: "";
-      display: inline-block;
-      width: 32px;
-      height: 1px;
-      background: var(--accent);
+      content: ""; display: inline-block;
+      width: 32px; height: 1px; background: var(--accent);
     }
 
     h1.hero-name {
       font-family: var(--font-display);
-      font-size: clamp(4rem, 12vw, 9rem);
-      line-height: 0.95;
-      letter-spacing: 0.02em;
-      color: var(--text);
-      margin-bottom: 0.2rem;
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      line-height: 0.95; letter-spacing: 0.02em;
+      color: var(--text); margin-bottom: 0.2rem;
     }
-
-    h1.hero-name span {
-      -webkit-text-stroke: 1px var(--accent);
-      color: transparent;
-    }
+    h1.hero-name span { -webkit-text-stroke: 1px var(--accent); color: transparent; }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: var(--muted);
-      margin: 1.8rem 0 2.4rem;
-      max-width: 560px;
-      font-weight: 400;
-      line-height: 1.6;
+      font-size: clamp(0.92rem, 2.5vw, 1.2rem);
+      color: var(--muted); margin: 1.8rem 0 2.4rem;
+      max-width: 560px; font-weight: 400; line-height: 1.7;
     }
+    .hero-sub strong { color: var(--text); font-weight: 500; }
 
-    .hero-sub strong {
-      color: var(--text);
-      font-weight: 500;
+    /* typing cursor */
+    .type-cursor {
+      display: inline-block; width: 2px; height: 1em;
+      background: var(--accent); margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 0.9s step-end infinite;
     }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+    .hero-cta { display: flex; gap: 0.8rem; flex-wrap: wrap; }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.6rem;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-      border: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.6rem; border-radius: 4px;
+      font-family: var(--font-mono); font-size: 0.78rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.22s;
+      cursor: pointer; border: none;
     }
-
-    .btn-primary {
-      background: var(--accent);
-      color: var(--bg);
-      font-weight: 500;
-    }
-
-    .btn-primary:hover {
-      background: #fff;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 245, 200, 0.2);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-2px);
-    }
+    .btn-primary { background: var(--accent); color: var(--bg); font-weight: 500; }
+    .btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,245,200,0.2); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
     .hero-stats {
-      display: flex;
-      gap: 3rem;
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
+      display: flex; gap: clamp(1.5rem, 5vw, 3rem);
+      margin-top: 4rem; padding-top: 2rem;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
     }
-
     .stat-num {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      line-height: 1;
-      color: var(--accent);
+      font-family: var(--font-display); font-size: 2.5rem;
+      line-height: 1; color: var(--accent);
     }
-
     .stat-label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 0.3rem;
+      font-family: var(--font-mono); font-size: 0.7rem;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.1em; margin-top: 0.3rem;
     }
 
-    /* SECTIONS */
-    section {
-      padding: 6rem 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-    }
+    /* ─── SECTIONS ─── */
+    section { padding: 6rem 2rem; position: relative; z-index: 1; }
+    .container { max-width: 960px; margin: 0 auto; }
 
     .section-label {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
+      font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.8rem;
     }
-
     .section-label::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-      max-width: 80px;
+      content: ""; flex: 1; height: 1px; background: var(--border); max-width: 80px;
     }
-
     h2.section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      letter-spacing: 0.03em;
-      line-height: 1;
-      margin-bottom: 3rem;
-      color: var(--text);
+      font-family: var(--font-display); font-size: clamp(2.2rem, 6vw, 4rem);
+      letter-spacing: 0.03em; line-height: 1; margin-bottom: 3rem; color: var(--text);
     }
 
-    /* EXPERIENCE */
+    /* ─── EXPERIENCE ─── */
     .exp-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      transition:
-        border-color 0.3s,
-        transform 0.3s;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 2rem; position: relative;
+      overflow: hidden; transition: border-color 0.3s, transform 0.3s;
       margin-bottom: 1rem;
     }
-
     .exp-item::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.3s;
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: var(--accent); opacity: 0; transition: opacity 0.3s;
     }
-
-    .exp-item:hover {
-      border-color: rgba(0, 245, 200, 0.2);
-      transform: translateX(4px);
-    }
-
-    .exp-item:hover::before {
-      opacity: 1;
-    }
+    .exp-item:hover { border-color: rgba(0,245,200,0.2); transform: translateX(4px); }
+    .exp-item:hover::before { opacity: 1; }
 
     .exp-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.8rem;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 0.8rem;
     }
-
-    .exp-role {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .exp-company {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
+    .exp-role { font-size: 1.1rem; font-weight: 600; color: var(--text); }
+    .exp-company { color: var(--accent); font-weight: 500; }
     .exp-period {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-      white-space: nowrap;
-      background: var(--bg3);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      border: 1px solid var(--border);
+      font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted);
+      white-space: nowrap; background: var(--bg3); padding: 0.3rem 0.8rem;
+      border-radius: 20px; border: 1px solid var(--border);
     }
-
-    .exp-bullets {
-      list-style: none;
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
+    .exp-bullets { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
     .exp-bullets li {
-      font-size: 0.88rem;
-      color: var(--muted);
-      padding-left: 1.2rem;
-      position: relative;
-      line-height: 1.6;
+      font-size: 0.88rem; color: var(--muted); padding-left: 1.2rem;
+      position: relative; line-height: 1.6;
     }
+    .exp-bullets li::before { content: "›"; position: absolute; left: 0; color: var(--accent); }
 
-    .exp-bullets li::before {
-      content: "›";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
+    /* ─── PROJECTS CAROUSEL ─── */
+    #projects { background: var(--bg2); padding: 6rem 0; overflow: hidden; }
 
-    /* ═══════════════════════════════════
-         PROJECTS — CAROUSEL
-         All card styles are unchanged from
-         the original stacked layout.
-      ═══════════════════════════════════ */
-    #projects {
-      background: var(--bg2);
-      padding: 6rem 0;
-      /* no side padding — carousel handles it */
-      overflow: hidden;
-    }
-
-    /* header row (label + title + arrows) */
     .projects-header {
-      max-width: 960px;
-      margin: 0 auto 2.5rem;
-      padding: 0 2rem;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
+      max-width: 960px; margin: 0 auto 2.5rem; padding: 0 2rem;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
     }
-
-    /* arrow buttons */
-    .carousel-arrows {
-      display: flex;
-      gap: 0.6rem;
-      flex-shrink: 0;
-    }
-
+    .carousel-arrows { display: flex; gap: 0.6rem; flex-shrink: 0; }
     .arrow-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--card);
+      color: var(--text); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       transition: all 0.2s;
     }
+    .arrow-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,245,200,0.06); }
+    .arrow-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .arrow-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    .arrow-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(0, 245, 200, 0.06);
-    }
-
-    .arrow-btn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    .arrow-btn svg {
-      width: 16px;
-      height: 16px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    /* viewport */
     .carousel-viewport {
-      overflow: hidden;
-      cursor: grab;
-      user-select: none;
-      -webkit-mask-image: linear-gradient(to right,
-          transparent 0%,
-          black 3%,
-          black 97%,
-          transparent 100%);
-      mask-image: linear-gradient(to right,
-          transparent 0%,
-          black 3%,
-          black 97%,
-          transparent 100%);
+      overflow: hidden; cursor: grab; user-select: none;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
     }
-
-    .carousel-viewport.dragging {
-      cursor: grabbing;
-    }
-
-    /* track — each slide IS one full project-row */
+    .carousel-viewport.dragging { cursor: grabbing; }
     .carousel-track {
-      display: flex;
-      gap: 0;
-      /* slides are separated by inner padding */
-      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex; gap: 0;
+      transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
       will-change: transform;
     }
+    .carousel-slide { flex: 0 0 100%; width: 100%; padding: 0 2rem; }
 
-    /* each slide wraps one project-row */
-    .carousel-slide {
-      flex: 0 0 100%;
-      width: 100%;
-      padding: 0 2rem;
-      /* match container side padding */
+    /* slide counter badge */
+    .slide-counter {
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted);
+      text-align: center; margin-top: 1.2rem; letter-spacing: 0.1em;
     }
+    .slide-counter span { color: var(--accent); }
 
-    /* ── ORIGINAL PROJECT ROW STYLES (unchanged) ── */
     .project-row {
-      max-width: 960px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
     }
-
-    .project-row.reverse {
-      direction: rtl;
-    }
-
-    .project-row.reverse>* {
-      direction: ltr;
-    }
+    .project-row.reverse { direction: rtl; }
+    .project-row.reverse > * { direction: ltr; }
 
     .mockup-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.2rem;
-      position: relative;
-      padding-bottom: 20px;
-      /* compensates for the translateY(20px) on the 2nd phone */
+      display: flex; justify-content: center; align-items: center;
+      gap: 1.2rem; position: relative; padding-bottom: 20px;
     }
-
     .phone-mockup {
-      width: 155px;
-      flex-shrink: 0;
-      position: relative;
-      filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.6));
+      width: 155px; flex-shrink: 0; position: relative;
+      filter: drop-shadow(0 24px 40px rgba(0,0,0,0.6));
       transition: transform 0.4s ease;
     }
-
-    .phone-mockup:hover {
-      transform: translateY(-8px) rotate(-1deg);
-    }
-
-    .phone-mockup:nth-child(2) {
-      transform: translateY(20px);
-    }
-
-    .phone-mockup:nth-child(2):hover {
-      transform: translateY(12px) rotate(1deg);
-    }
+    .phone-mockup:hover { transform: translateY(-8px) rotate(-1deg); }
+    .phone-mockup:nth-child(2) { transform: translateY(20px); }
+    .phone-mockup:nth-child(2):hover { transform: translateY(12px) rotate(1deg); }
 
     .phone-frame {
-      width: 100%;
-      border-radius: 28px;
-      border: 2px solid rgba(255, 255, 255, 0.12);
-      overflow: hidden;
-      background: #0a0b10;
-      position: relative;
+      width: 100%; border-radius: 28px;
+      border: 2px solid rgba(255,255,255,0.12);
+      overflow: hidden; background: #0a0b10; position: relative;
     }
-
     .phone-notch {
-      position: absolute;
-      top: 4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 25px;
-      height: 7px;
-      background: #0a0b10;
-      border-radius: 4px;
-      z-index: 2;
+      position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+      width: 25px; height: 7px; background: #0a0b10;
+      border-radius: 4px; z-index: 2;
     }
-
     .phone-screen-dummy {
-      width: 100%;
-      aspect-ratio: 9/19;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      color: rgba(255, 255, 255, 0.2);
-      text-align: center;
-      padding: 1rem;
-    }
-
-    /* Replace with real image:
-         delete .phone-screen-dummy, paste:
-         <img src="images/NAME.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="..." /> */
-
-    .dummy-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      margin-bottom: 0.3rem;
+      width: 100%; aspect-ratio: 9/19;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 0.5rem;
+      font-family: var(--font-mono); font-size: 0.55rem;
+      color: rgba(255,255,255,0.2); text-align: center; padding: 1rem;
     }
 
     .browser-mockup {
-      width: 100%;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      overflow: hidden;
-      background: #0d0f17;
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+      width: 100%; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1); overflow: hidden;
+      background: #0d0f17; box-shadow: 0 24px 48px rgba(0,0,0,0.5);
       transition: transform 0.4s ease;
     }
-
-    .browser-mockup:hover {
-      transform: translateY(-6px);
-    }
-
+    .browser-mockup:hover { transform: translateY(-6px); }
     .browser-bar {
-      padding: 0.6rem 1rem;
-      background: #12141f;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+      padding: 0.6rem 1rem; background: #12141f;
+      display: flex; align-items: center; gap: 0.4rem;
       border-bottom: 1px solid var(--border);
     }
-
-    .browser-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .browser-dot:nth-child(1) {
-      background: #ff5f57;
-    }
-
-    .browser-dot:nth-child(2) {
-      background: #febc2e;
-    }
-
-    .browser-dot:nth-child(3) {
-      background: #28c840;
-    }
-
+    .browser-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .browser-dot:nth-child(1) { background: #ff5f57; }
+    .browser-dot:nth-child(2) { background: #febc2e; }
+    .browser-dot:nth-child(3) { background: #28c840; }
     .browser-url {
-      flex: 1;
-      background: var(--bg);
-      border-radius: 4px;
-      padding: 0.2rem 0.7rem;
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      color: var(--muted);
-      margin-left: 0.4rem;
+      flex: 1; background: var(--bg); border-radius: 4px;
+      padding: 0.2rem 0.7rem; font-family: var(--font-mono);
+      font-size: 0.58rem; color: var(--muted); margin-left: 0.4rem;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-
     .browser-screen {
-      width: 100%;
-      aspect-ratio: 16/10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      color: rgba(255, 255, 255, 0.2);
-      text-align: center;
+      width: 100%; aspect-ratio: 16/10;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.5rem;
+      font-family: var(--font-mono); font-size: 0.62rem;
+      color: rgba(255,255,255,0.2); text-align: center;
     }
 
-    /* Replace with real screenshot:
-         delete .browser-screen, paste inside .browser-mockup (after .browser-bar):
-         <img src="images/NAME.png" style="width:100%;display:block;" alt="..." /> */
-
-    .project-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
+    .project-info { display: flex; flex-direction: column; gap: 1rem; }
     .project-num {
-      font-family: var(--font-display);
-      font-size: 4rem;
-      line-height: 1;
-      color: rgba(255, 255, 255, 0.05);
-      margin-bottom: -0.5rem;
+      font-family: var(--font-display); font-size: 4rem;
+      line-height: 1; color: rgba(255,255,255,0.05); margin-bottom: -0.5rem;
     }
-
-    .project-name {
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.2;
-    }
-
-    .project-type {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .project-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
+    .project-name { font-size: 1.6rem; font-weight: 600; color: var(--text); line-height: 1.2; }
+    .project-type { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
+    .project-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .tag {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      padding: 0.2rem 0.6rem;
-      background: rgba(0, 245, 200, 0.05);
-      border: 1px solid rgba(0, 245, 200, 0.15);
-      border-radius: 3px;
-      color: var(--accent);
+      font-family: var(--font-mono); font-size: 0.65rem;
+      padding: 0.2rem 0.6rem; background: rgba(0,245,200,0.05);
+      border: 1px solid rgba(0,245,200,0.15); border-radius: 3px; color: var(--accent);
     }
-
-    .store-links {
-      display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      margin-top: 0.4rem;
-    }
-
+    .store-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.4rem; }
     .store-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.55rem 1rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.05em;
-      transition: all 0.2s;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.55rem 1rem; border-radius: 6px; text-decoration: none;
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.05em;
+      transition: all 0.2s; border: 1px solid var(--border);
+      background: var(--card); color: var(--text);
     }
+    .store-badge:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,245,200,0.1); }
+    .store-badge svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+    .store-badge.website { border-color: rgba(0,153,255,0.25); color: var(--accent2); }
+    .store-badge.website:hover { border-color: var(--accent2); box-shadow: 0 4px 16px rgba(0,153,255,0.1); }
 
-    .store-badge:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 245, 200, 0.1);
-    }
-
-    .store-badge svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    .store-badge.website {
-      border-color: rgba(0, 153, 255, 0.25);
-      color: var(--accent2);
-    }
-
-    .store-badge.website:hover {
-      border-color: var(--accent2);
-      box-shadow: 0 4px 16px rgba(0, 153, 255, 0.1);
-    }
-
-    /* progress dots */
-    .carousel-dots {
-      display: flex;
-      gap: 0.4rem;
-      justify-content: center;
-      margin-top: 2.5rem;
-      padding: 0 2rem;
-    }
-
+    .carousel-dots { display: flex; gap: 0.4rem; justify-content: center; margin-top: 2.5rem; padding: 0 2rem; }
     .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 3px;
-      background: var(--border);
-      transition: all 0.3s;
-      cursor: pointer;
-      border: none;
+      width: 6px; height: 6px; border-radius: 3px;
+      background: var(--border); transition: all 0.3s;
+      cursor: pointer; border: none; padding: 0;
     }
+    .dot:hover { background: rgba(0,245,200,0.4); }
+    .dot.active { background: var(--accent); width: 24px; }
 
-    .dot.active {
-      background: var(--accent);
-      width: 24px;
-    }
-
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
+    /* ─── SKILLS ─── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
     .skill-group {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.5rem;
+      transition: border-color 0.2s;
     }
-
+    .skill-group:hover { border-color: rgba(0,245,200,0.15); }
     .skill-group-title {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 1rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem;
+      padding-bottom: 0.8rem; border-bottom: 1px solid var(--border);
     }
-
-    .skill-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
+    .skill-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .skill-pill {
-      font-size: 0.78rem;
-      padding: 0.3rem 0.7rem;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--text);
-      transition: all 0.2s;
+      font-size: 0.78rem; padding: 0.3rem 0.7rem;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 3px; color: var(--text); transition: all 0.2s;
     }
+    .skill-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,245,200,0.05); }
 
-    .skill-pill:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(0, 245, 200, 0.05);
-    }
-
-    /* CONTACT */
-    #contact {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-    }
-
-    .contact-inner {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .contact-inner p {
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
+    /* ─── CONTACT ─── */
+    #contact { background: var(--bg2); border-top: 1px solid var(--border); }
+    .contact-inner { text-align: center; max-width: 600px; margin: 0 auto; }
+    .contact-inner p { color: var(--muted); margin-bottom: 2.5rem; font-size: 1rem; }
+    .contact-links { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
     .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.4rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text);
-      text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.2rem; border: 1px solid var(--border);
+      border-radius: 4px; color: var(--text); text-decoration: none;
+      font-family: var(--font-mono); font-size: 0.72rem;
+      letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.2s;
     }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,245,200,0.1); }
+    .contact-link svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
 
-    .contact-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 245, 200, 0.1);
-    }
-
+    /* ─── FOOTER ─── */
     footer {
-      padding: 2rem;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--muted);
+      padding: 2rem; text-align: center;
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted);
       border-top: 1px solid var(--border);
     }
+    footer span { color: var(--accent); }
 
-    /* ANIMATIONS */
+    /* ─── BACK TO TOP ─── */
+    #backToTop {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 50;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transform: translateY(8px);
+      transition: all 0.3s; font-size: 1rem;
+    }
+    #backToTop.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
+    #backToTop:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,245,200,0.06); }
+
+    /* ─── REVEAL ANIMATIONS ─── */
     .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-delay-1 {
-      transition-delay: 0.1s;
-    }
-
-    .reveal-delay-2 {
-      transition-delay: 0.2s;
-    }
-
-    .reveal-delay-3 {
-      transition-delay: 0.3s;
-    }
-
-    .reveal-delay-4 {
-      transition-delay: 0.4s;
-    }
-
-    /* CURSOR */
+    /* ─── CURSOR (desktop only) ─── */
     .cursor {
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      mix-blend-mode: screen;
+      width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%); mix-blend-mode: screen;
     }
-
     .cursor-ring {
-      width: 32px;
-      height: 32px;
-      border: 1px solid rgba(0, 245, 200, 0.4);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: all 0.15s ease;
+      width: 32px; height: 32px; border: 1px solid rgba(0,245,200,0.4);
+      border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%); transition: all 0.15s ease;
       mix-blend-mode: screen;
     }
 
-    /* RESPONSIVE */
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .project-row { grid-template-columns: 1fr; gap: 2.5rem; }
+      .project-row.reverse { direction: ltr; }
+      .project-row .mockup-wrap { max-width: 360px; margin: 0 auto; }
+      .phone-mockup { width: 130px; }
+    }
+
     @media (max-width: 720px) {
-      nav {
-        padding: 1rem;
-      }
+      nav { padding: 0 1.2rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
 
-      .nav-links {
-        gap: 1.2rem;
-      }
+      .cursor, .cursor-ring { display: none; }
 
-      .nav-links a {
-        font-size: 0.7rem;
-      }
+      #hero { padding: calc(var(--nav-h) + 3rem) 1.2rem 3rem; }
 
-      .cursor,
-      .cursor-ring {
-        display: none;
-      }
+      h1.hero-name { font-size: clamp(3rem, 16vw, 5rem); }
 
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
+      .hero-stats { gap: 1.5rem; margin-top: 2.5rem; }
+      .stat-num { font-size: 2rem; }
 
-      .project-row {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+      section { padding: 4rem 1.2rem; }
 
-      .project-row.reverse {
-        direction: ltr;
-      }
+      .projects-header { padding: 0 1.2rem; flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+      .carousel-arrows { align-self: flex-end; }
+      .carousel-slide { padding: 0 1.2rem; }
 
-      .phone-mockup {
-        width: 125px;
-      }
+      .exp-item { padding: 1.4rem; }
+      .exp-header { flex-direction: column; gap: 0.5rem; }
+      .exp-period { align-self: flex-start; }
 
-      .projects-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .skills-grid { grid-template-columns: 1fr; }
 
-      .carousel-arrows {
-        align-self: flex-end;
-      }
+      .contact-links { gap: 0.5rem; }
+      .contact-link { font-size: 0.68rem; padding: 0.7rem 1rem; }
+
+      #backToTop { bottom: 1.2rem; right: 1.2rem; }
+    }
+
+    @media (max-width: 400px) {
+      h1.hero-name { font-size: 2.8rem; }
+      .hero-cta { flex-direction: column; }
+      .hero-cta .btn { text-align: center; justify-content: center; }
     }
   </style>
 </head>
-
 <body>
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
 
-  <nav>
-    <div class="nav-logo">afaque.dev</div>
-    <ul class="nav-links">
-      <li><a href="#experience">Exp</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<button id="backToTop" aria-label="Back to top">↑</button>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-glow"></div>
-    <div class="hero-glow2"></div>
-    <div class="hero-inner">
-      <div class="hero-tag reveal">
-        React Native · Frontend Developer · Karachi, Pakistan
-      </div>
-      <h1 class="hero-name reveal reveal-delay-1">
-        AFAQUE<br /><span>AHMED</span>
-      </h1>
-      <p class="hero-sub reveal reveal-delay-2">
-        Building <strong>cross-platform iOS &amp; Android apps</strong> for 3+
-        years. Specialised in real-time systems, payment integrations, and
-        performance-critical mobile experiences — shipped to
-        <strong>Google Play</strong> and <strong>App Store</strong>.
-      </p>
-      <div class="hero-cta reveal reveal-delay-3">
-        <a id="getInTouchBtn" class="btn btn-primary">↗ Get in touch</a>
-        <!-- REPLACE with your real URLs -->
-        <a href="https://github.com/Afaque22" target="_blank" class="btn btn-ghost">GitHub</a>
-        <a href="https://linkedin.com/in/afaque-memon-7271aa1b3/
-            target=" _blank" class="btn btn-ghost">LinkedIn</a>
-      </div>
-      <div class="hero-stats reveal reveal-delay-4">
-        <div>
-          <div class="stat-num">3+</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div>
-          <div class="stat-num">5+</div>
-          <div class="stat-label">Apps Shipped</div>
-        </div>
-        <div>
-          <div class="stat-num">2</div>
-          <div class="stat-label">Platforms</div>
-        </div>
-        <div>
-          <div class="stat-num">60%</div>
-          <div class="stat-label">Frame Drop Reduction</div>
-        </div>
-      </div>
+<!-- ─── NAV ─── -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">afaque.dev</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Exp</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- mobile drawer -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <a href="#experience" class="mob-link">Experience</a>
+  <a href="#projects" class="mob-link">Projects</a>
+  <a href="#skills" class="mob-link">Skills</a>
+  <a href="#contact" class="mob-link">Contact</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-tag reveal">React Native · Frontend Developer · Karachi, Pakistan</div>
+    <h1 class="hero-name reveal reveal-delay-1">AFAQUE<br/><span>AHMED</span></h1>
+    <p class="hero-sub reveal reveal-delay-2">
+      Building <strong>cross-platform iOS &amp; Android apps</strong> for 3+ years. Specialised in real-time systems, payment integrations, and performance-critical mobile experiences — shipped to <strong>Google Play</strong> and <strong>App Store</strong>.
+    </p>
+    <div class="hero-cta reveal reveal-delay-3">
+      <a id="getInTouchBtn" class="btn btn-primary">↗ Get in touch</a>
+      <a href="https://github.com/Afaque22" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+      <a href="https://linkedin.com/in/afaque-memon-7271aa1b3/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
     </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="container">
-      <div class="section-label reveal">Work History</div>
-      <h2 class="section-title reveal">Experience</h2>
-
-      <div class="exp-item reveal">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">Frontend Developer</div>
-            <div class="exp-company">Superbutler.ai</div>
-          </div>
-          <div class="exp-period">Feb 2025 – Present</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>
-            Architected full multi-provider payment stack for Reftalk —
-            Stripe, Apple Pay, and Google Pay with wallet creation and
-            cross-platform payment sheet rendering.
-          </li>
-          <li>
-            Built sub-second real-time live sports commentary using
-            event-driven pub/sub architecture (Socket.IO), sustaining
-            low-latency updates during concurrent high-traffic sessions.
-          </li>
-          <li>
-            Rescued Supermeal's React Native codebase from a full dependency
-            freeze — audited and upgraded the entire library tree, restoring
-            active feature development velocity.
-          </li>
-          <li>
-            Shipped Superbutler Center to both app stores with structured
-            client-side logging, reducing production bug reproduction time by
-            ~40%.
-          </li>
-          <li>
-            Built dynamic content system for Superbutler marketing site
-            (Next.js) with CMS integration, enabling non-technical teams to
-            publish independently.
-          </li>
-          <li>
-            Extended VAPI AI voice assistant with multilingual support and
-            condition-based trigger logic across multiple language regions.
-          </li>
-        </ul>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">Mobile App Developer</div>
-            <div class="exp-company">Sid Techno</div>
-          </div>
-          <div class="exp-period">Jul 2024 – Jan 2025</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>
-            Architected real-time chat (Socket.IO) and live video streaming
-            (Agora SDK) in a social commerce app — sub-200ms event latency on
-            concurrent sessions.
-          </li>
-          <li>
-            Developed a Kotlin native module bridged into React Native to
-            offload CPU-intensive content-blocking logic from the JS thread,
-            eliminating UI jank on mid-range devices.
-          </li>
-          <li>
-            Optimised FlatList-heavy social feeds with windowed rendering,
-            React.memo, and useMemo — reduced dropped frames by ~60% on
-            mid-range Android hardware.
-          </li>
-          <li>
-            Integrated Stripe in-app purchases and a live bidding engine,
-            enabling real-time monetisation flows natively within the app.
-          </li>
-        </ul>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">Mobile App Developer</div>
-            <div class="exp-company">Softonology Systems</div>
-          </div>
-          <div class="exp-period">Apr 2023 – May 2024</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>
-            Led end-to-end development of Radiant Workforce HRMS —
-            geofence-based attendance for 200+ distributed field employees
-            across multiple sites.
-          </li>
-          <li>
-            Integrated Realm for local data persistence, keeping the app fully
-            functional offline with automatic background sync on reconnection.
-          </li>
-          <li>
-            Standardised Redux Toolkit architecture company-wide, reducing
-            state management boilerplate by ~30% across subsequent projects.
-          </li>
-          <li>
-            Delivered Biplee live commerce app against AWS-backed REST APIs,
-            optimised for smooth streaming UX under variable network
-            conditions.
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════════
-         PROJECTS — each .carousel-slide is one project-row
-         (identical markup to the original stacked layout)
-    ══════════════════════════════════════════════════ -->
-  <section id="projects">
-    <div class="projects-header reveal">
+    <div class="hero-stats reveal reveal-delay-4">
       <div>
-        <div class="section-label">Selected Work</div>
-        <h2 class="section-title" style="margin-bottom: 0">Projects</h2>
+        <div class="stat-num" data-target="3" data-suffix="+">0</div>
+        <div class="stat-label">Years Experience</div>
       </div>
-      <div class="carousel-arrows">
-        <button class="arrow-btn" id="prevBtn" aria-label="Previous">
-          <svg viewBox="0 0 24 24">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
-        <button class="arrow-btn" id="nextBtn" aria-label="Next">
-          <svg viewBox="0 0 24 24">
-            <polyline points="9 6 15 12 9 18" />
-          </svg>
-        </button>
+      <div>
+        <div class="stat-num" data-target="5" data-suffix="+">0</div>
+        <div class="stat-label">Apps Shipped</div>
+      </div>
+      <div>
+        <div class="stat-num" data-target="2" data-suffix="">0</div>
+        <div class="stat-label">Platforms</div>
+      </div>
+      <div>
+        <div class="stat-num" data-target="60" data-suffix="%">0</div>
+        <div class="stat-label">Frame Drop Reduction</div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="carousel-viewport" id="carouselViewport">
-      <div class="carousel-track" id="carouselTrack">
-        <!-- ══ SLIDE 1: SUPERBUTLER CENTER ══ -->
-        <div class="carousel-slide">
-          <div class="project-row">
-            <div class="mockup-wrap">
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: <img src="images/superbutler-1.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="Superbutler Center" /> -->
-                  <img src="images/superbutler-1.jpeg" alt="superbutler 1" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: <img src="images/superbutler-2.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="Superbutler Center" /> -->
-                  <img src="images/superbutler-2.jpeg" alt="superbutler 2" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-num">01</div>
-              <div class="project-type">Hotel Operations App</div>
-              <div class="project-name">Superbutler Center</div>
-              <p class="project-desc">
-                Staff-facing mobile app for service order management and
-                operational tracking — shipped to both stores with structured
-                logging that cut production debug time by ~40%.
-              </p>
-              <div class="project-tags">
-                <span class="tag">React Native</span><span class="tag">REST APIs</span>
-                <span class="tag">Socket IO</span><span class="tag">Client Logging</span>
-              </div>
-              <div class="store-links">
-                <!-- REPLACE # with actual links -->
-                <a href="https://apps.apple.com/ca/app/superbutler-center/id6670790608" target="_blank"
-                  class="store-badge">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                  </svg>
-                  App Store
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=butlercenter.superbutler.ai&pcampaignid=web_share"
-                  target="_blank" class="store-badge">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M3.18 23.76c.28.15.61.19.96.08l13.2-7.53-2.83-2.83-11.33 10.28zm-1.11-20.3C2.03 3.74 2 4.06 2 4.44v15.12c0 .38.03.7.07 1l11.51-11.5L2.07 3.46zM20.1 10.24l-2.76-1.57-3.16 3.16 3.16 3.16 2.79-1.59c.8-.45.8-1.71-.03-2.16zM4.14.25C3.8.15 3.46.18 3.18.33L14.54 11.7l2.83-2.83L4.14.25z" />
-                  </svg>
-                  Google Play
-                </a>
-              </div>
-            </div>
-          </div>
+<!-- ─── EXPERIENCE ─── -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">Work History</div>
+    <h2 class="section-title reveal">Experience</h2>
+
+    <div class="exp-item reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Frontend Developer</div>
+          <div class="exp-company">Superbutler.ai</div>
         </div>
-
-        <!-- ══ SLIDE 2: RADIANT WORKFORCE ══ -->
-        <div class="carousel-slide">
-          <div class="project-row reverse">
-            <div class="mockup-wrap">
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: <img src="images/radiant-1.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="Radiant Workforce" /> -->
-                  <img src="images/radiant-1.png" alt="radiant 1" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: <img src="images/radiant-2.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="Radiant Workforce" /> -->
-                  <img src="images/radiant-2.png" alt="radiant 2" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-num">02</div>
-              <div class="project-type">HRMS Mobile App</div>
-              <div class="project-name">Radiant Workforce</div>
-              <p class="project-desc">
-                Offline-capable HRMS with geofence-enforced attendance —
-                deployed for 200+ field employees. Maintains full
-                functionality without connectivity and auto-syncs on
-                reconnection.
-              </p>
-              <div class="project-tags">
-                <span class="tag">React Native</span><span class="tag">Realm</span>
-                <span class="tag">Redux Toolkit</span><span class="tag">Geolocation API</span><span
-                  class="tag">Axios</span><span class="tag">HTML to PDF</span>
-              </div>
-              <div class="store-links">
-                <!-- REPLACE # with actual links -->
-                <a href="https://apps.apple.com/us/app/rwf-radiant-workforce/id1583232157" target="_blank"
-                  class="store-badge">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                  </svg>
-                  App Store
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=com.softnology.rwfplus&pcampaignid=web_share"
-                  target="_blank" class="store-badge">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M3.18 23.76c.28.15.61.19.96.08l13.2-7.53-2.83-2.83-11.33 10.28zm-1.11-20.3C2.03 3.74 2 4.06 2 4.44v15.12c0 .38.03.7.07 1l11.51-11.5L2.07 3.46zM20.1 10.24l-2.76-1.57-3.16 3.16 3.16 3.16 2.79-1.59c.8-.45.8-1.71-.03-2.16zM4.14.25C3.8.15 3.46.18 3.18.33L14.54 11.7l2.83-2.83L4.14.25z" />
-                  </svg>
-                  Google Play
-                </a>
-              </div>
-              <!-- Internal client app — add store link if available -->
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ SLIDE 3: REFTALK ══ -->
-        <div class="carousel-slide">
-          <div class="project-row">
-            <div class="mockup-wrap">
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: delete .phone-screen-dummy, paste <img src="images/reftalk-1.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="Reftalk" /> -->
-                  <img src="images/reftalk-1.png" alt="Reftalk 1" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: delete .phone-screen-dummy, paste <img src="images/reftalk-2.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="Reftalk" /> -->
-                  <img src="images/reftalk-2.png" alt="Reftalk 2" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-num">03</div>
-              <div class="project-type">Sports Social Platform</div>
-              <div class="project-name">Reftalk</div>
-              <p class="project-desc">
-                Live audio streaming and sports social platform with
-                multi-provider wallet integration, real-time commentary
-                engine, and cross-platform payment flows — published to both
-                stores.
-              </p>
-              <div class="project-tags">
-                <span class="tag">React Native</span><span class="tag">React.js</span>
-                <span class="tag">Stripe</span><span class="tag">Dolby</span><span class="tag">Web RTC</span>
-              </div>
-              <div class="store-links">
-                <!-- REPLACE # with actual links -->
-                <a href="https://apps.apple.com/ie/app/ref-talk/id1617585097" target="_blank" class="store-badge">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                  </svg>
-                  App Store
-                </a>
-                <!-- <a href="#" target="_blank" class="store-badge">
-                    <svg viewBox="0 0 24 24">
-                      <path
-                        d="M3.18 23.76c.28.15.61.19.96.08l13.2-7.53-2.83-2.83-11.33 10.28zm-1.11-20.3C2.03 3.74 2 4.06 2 4.44v15.12c0 .38.03.7.07 1l11.51-11.5L2.07 3.46zM20.1 10.24l-2.76-1.57-3.16 3.16 3.16 3.16 2.79-1.59c.8-.45.8-1.71-.03-2.16zM4.14.25C3.8.15 3.46.18 3.18.33L14.54 11.7l2.83-2.83L4.14.25z"
-                      />
-                    </svg>
-                    Google Play
-                  </a> -->
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ SLIDE 4: IIMIIN ══ -->
-        <div class="carousel-slide">
-          <div class="project-row reverse">
-            <div class="mockup-wrap">
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: <img src="images/iimiin-1.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="iimiin" /> -->
-                  <img src="images/iimiin-1.png" alt="iimiin 1" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: <img src="images/iimiin-2.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="iimiin" /> -->
-                  <img src="images/iimiin-2.png" alt="iimiin 2" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-num">04</div>
-              <div class="project-type">Live Commerce App</div>
-              <div class="project-name">iimiin</div>
-              <p class="project-desc">
-                Interactive live shopping platform with real-time video
-                streaming, live bidding engine, and Stripe-powered checkout —
-                architected for low-latency concurrent session handling.
-              </p>
-              <div class="project-tags">
-                <span class="tag">React Native</span><span class="tag">Agora</span>
-                <span class="tag">Socket.IO</span><span class="tag">Stripe Connect</span><span class="tag">Kotlin</span>
-              </div>
-              <div class="store-links">
-                <!-- REPLACE # with actual Play Store link -->
-                <a href="https://apps.apple.com/ca/app/iimiin/id6739402890" target="_blank" class="store-badge">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                  </svg>
-                  App Store
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=com.iimiin&pcampaignid=web_share" target="_blank"
-                  class="store-badge">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M3.18 23.76c.28.15.61.19.96.08l13.2-7.53-2.83-2.83-11.33 10.28zm-1.11-20.3C2.03 3.74 2 4.06 2 4.44v15.12c0 .38.03.7.07 1l11.51-11.5L2.07 3.46zM20.1 10.24l-2.76-1.57-3.16 3.16 3.16 3.16 2.79-1.59c.8-.45.8-1.71-.03-2.16zM4.14.25C3.8.15 3.46.18 3.18.33L14.54 11.7l2.83-2.83L4.14.25z" />
-                  </svg>
-                  Google Play
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ SLIDE 5: BIPLEE ══ -->
-        <div class="carousel-slide">
-          <div class="project-row">
-            <div class="mockup-wrap">
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: <img src="images/biplee-1.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="Biplee" /> -->
-                  <img src="images/biplee-1.png" alt="biplee 1" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-              <div class="phone-mockup">
-                <div class="phone-frame">
-                  <div class="phone-notch"></div>
-                  <!-- REPLACE: <img src="images/biplee-2.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="Biplee" /> -->
-                  <img src="images/biplee-2.png" alt="biplee 2" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        display: block;
-                      " />
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-num">05</div>
-              <div class="project-type">Live Commerce App</div>
-              <div class="project-name">biplee</div>
-              <p class="project-desc">
-                Live commerce app delivered against AWS-backed REST APIs —
-                optimised Axios request pipelines for media-heavy payloads,
-                maintaining smooth streaming UX under variable network
-                conditions.
-              </p>
-              <div class="project-tags">
-                <span class="tag">React Native</span><span class="tag">Axios</span> <span class="tag">AWS</span><span
-                  class="tag">Redux Toolkit</span><span class="tag">Web RTC Streaming</span>
-              </div>
-              <div class="store-links">
-                <!-- REPLACE # with actual Play Store link -->
-                <a href="https://apps.apple.com/us/app/biplee/id6450959332" target="_blank" class="store-badge">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                  </svg>
-                  App Store
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=com.biplee&pcampaignid=web_share" target="_blank"
-                  class="store-badge">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M3.18 23.76c.28.15.61.19.96.08l13.2-7.53-2.83-2.83-11.33 10.28zm-1.11-20.3C2.03 3.74 2 4.06 2 4.44v15.12c0 .38.03.7.07 1l11.51-11.5L2.07 3.46zM20.1 10.24l-2.76-1.57-3.16 3.16 3.16 3.16 2.79-1.59c.8-.45.8-1.71-.03-2.16zM4.14.25C3.8.15 3.46.18 3.18.33L14.54 11.7l2.83-2.83L4.14.25z" />
-                  </svg>
-                  Google Play
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ SLIDE 6: SUPERBUTLER BACKOFFICE ══ -->
-        <div class="carousel-slide">
-          <div class="project-row reverse">
-            <div class="mockup-wrap">
-              <!-- browser mockup for web app -->
-              <div class="browser-mockup" style="width: 100%">
-                <div class="browser-bar">
-                  <div class="browser-dot"></div>
-                  <div class="browser-dot"></div>
-                  <div class="browser-dot"></div>
-                  <div class="browser-url">https://backoffice.superbutler.ai</div>
-                </div>
-                <!-- REPLACE: delete .browser-screen, paste <img src="images/superbutler-backoffice.png" style="width:100%;display:block;" alt="SuperButler Backoffice" /> -->
-                <img src="images/backoffice.png" style="width: 100%; display: block" alt="SuperButler Backoffice" />
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-num">06</div>
-              <div class="project-type">Dashboard · Web</div>
-              <div class="project-name">SuperButler Backoffice</div>
-              <p class="project-desc">
-                Internal web dashboard with complete feature screens, state
-                management, and .NET REST API integration — cutting
-                frontend–backend handoff overhead significantly.
-              </p>
-              <div class="project-tags">
-                <span class="tag">React.js</span>
-                <span class="tag">Redux</span><span class="tag">REST APIs</span><span class="tag">i18n</span><span
-                  class="tag">Localization</span>
-              </div>
-              <div class="store-links">
-                <!-- REPLACE with actual website URL -->
-                <a href="https://backoffice.superbutler.ai/login" target="_blank" class="store-badge website">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                  </svg>
-                  Visit Website
-                </a>
-              </div>
-              <!-- Internal app — no public link. Add one below if available -->
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ SLIDE 7: SUPERBUTLER MARKETING WEBSITE ══ -->
-        <div class="carousel-slide">
-          <div class="project-row">
-            <div class="mockup-wrap">
-              <div class="browser-mockup" style="width: 100%">
-                <div class="browser-bar">
-                  <div class="browser-dot"></div>
-                  <div class="browser-dot"></div>
-                  <div class="browser-dot"></div>
-                  <div class="browser-url">https://www.superbutler.ai</div>
-                </div>
-                <!-- REPLACE: delete .browser-screen, paste <img src="images/superbutler-web.png" style="width:100%;display:block;" alt="Superbutler website" /> -->
-                <img src="images/superbutler.png" style="width: 100%; display: block" alt="SuperButler Backoffice" />
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-num">07</div>
-              <div class="project-type">Marketing Website</div>
-              <div class="project-name">Superbutler.ai</div>
-              <p class="project-desc">
-                Dynamic marketing site built with Next.js, file-based routing,
-                and CMS integration — enabling non-technical team members to
-                publish content independently without developer involvement.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Next.js</span><span class="tag">CMS Integration</span>
-                <span class="tag">File-based Routing</span>
-                <!-- ><span class="tag">VAPI AI</span> -->
-              </div>
-              <div class="store-links">
-                <!-- REPLACE with actual website URL -->
-                <a href="https://www.superbutler.ai/" target="_blank" class="store-badge website">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                  </svg>
-                  Visit Website
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!--
-            ═══════════════════════════════════════════════
-            ADD A NEW PROJECT — copy this template and paste
-            before the closing </div> of .carousel-track:
-
-            <div class="carousel-slide">
-              <div class="project-row">   ← add class="reverse" to flip layout
-                <div class="mockup-wrap">
-                  <div class="phone-mockup">
-                    <div class="phone-frame">
-                      <div class="phone-notch"></div>
-                      <img src="images/NAME.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="..." />
-                    </div>
-                  </div>
-                  <div class="phone-mockup"> ← optional second phone
-                    <div class="phone-frame">
-                      <div class="phone-notch"></div>
-                      <img src="images/NAME-2.png" style="width:100%;display:block;aspect-ratio:9/19;object-fit:cover;" alt="..." />
-                    </div>
-                  </div>
-                </div>
-                <div class="project-info">
-                  <div class="project-num">08</div>
-                  <div class="project-type">Type · Platform</div>
-                  <div class="project-name">Project Name</div>
-                  <p class="project-desc">Description here.</p>
-                  <div class="project-tags"><span class="tag">Tech</span></div>
-                  <div class="store-links">
-                    <a href="LINK" target="_blank" class="store-badge">App Store</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            For a website project use .browser-mockup instead of .phone-mockup.
-            ═══════════════════════════════════════════════
-          -->
+        <div class="exp-period">Feb 2025 – Present</div>
       </div>
-      <!-- /.carousel-track -->
+      <ul class="exp-bullets">
+        <li>Architected full multi-provider payment stack for Reftalk — Stripe, Apple Pay, and Google Pay with wallet creation and cross-platform payment sheet rendering.</li>
+        <li>Built sub-second real-time live sports commentary using event-driven pub/sub architecture (Socket.IO), sustaining low-latency updates during concurrent high-traffic sessions.</li>
+        <li>Rescued Supermeal's React Native codebase from a full dependency freeze — audited and upgraded the entire library tree, restoring active feature development velocity.</li>
+        <li>Shipped Superbutler Center to both app stores with structured client-side logging, reducing production bug reproduction time by ~40%.</li>
+        <li>Built dynamic content system for Superbutler marketing site (Next.js) with CMS integration, enabling non-technical teams to publish independently.</li>
+        <li>Extended VAPI AI voice assistant with multilingual support and condition-based trigger logic across multiple language regions.</li>
+      </ul>
     </div>
-    <!-- /.carousel-viewport -->
 
-    <div class="carousel-dots" id="carouselDots"></div>
-  </section>
+    <div class="exp-item reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Mobile App Developer</div>
+          <div class="exp-company">Sid Techno</div>
+        </div>
+        <div class="exp-period">Jul 2024 – Jan 2025</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Architected real-time chat (Socket.IO) and live video streaming (Agora SDK) in a social commerce app — sub-200ms event latency on concurrent sessions.</li>
+        <li>Developed a Kotlin native module bridged into React Native to offload CPU-intensive content-blocking logic from the JS thread, eliminating UI jank on mid-range devices.</li>
+        <li>Optimised FlatList-heavy social feeds with windowed rendering, React.memo, and useMemo — reduced dropped frames by ~60% on mid-range Android hardware.</li>
+        <li>Integrated Stripe in-app purchases and a live bidding engine, enabling real-time monetisation flows natively within the app.</li>
+      </ul>
+    </div>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="container">
-      <div class="section-label reveal">Technical Stack</div>
-      <h2 class="section-title reveal">Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-group reveal">
-          <div class="skill-group-title">Mobile</div>
-          <div class="skill-items">
-            <span class="skill-pill">React Native</span><span class="skill-pill">iOS</span>
-            <span class="skill-pill">Android</span><span class="skill-pill">Native Modules</span>
-            <span class="skill-pill">Offline-first</span><span class="skill-pill">Performance Opt.</span>
+    <div class="exp-item reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Mobile App Developer</div>
+          <div class="exp-company">Softonology Systems</div>
+        </div>
+        <div class="exp-period">Apr 2023 – May 2024</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Led end-to-end development of Radiant Workforce HRMS — geofence-based attendance for 200+ distributed field employees across multiple sites.</li>
+        <li>Integrated Realm for local data persistence, keeping the app fully functional offline with automatic background sync on reconnection.</li>
+        <li>Standardised Redux Toolkit architecture company-wide, reducing state management boilerplate by ~30% across subsequent projects.</li>
+        <li>Delivered Biplee live commerce app against AWS-backed REST APIs, optimised for smooth streaming UX under variable network conditions.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS CAROUSEL ─── -->
+<section id="projects">
+  <div class="projects-header reveal">
+    <div>
+      <div class="section-label">Selected Work</div>
+      <h2 class="section-title" style="margin-bottom:0">Projects</h2>
+    </div>
+    <div class="carousel-arrows">
+      <button class="arrow-btn" id="prevBtn" aria-label="Previous project">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="arrow-btn" id="nextBtn" aria-label="Next project">
+        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="carousel-viewport" id="carouselViewport">
+    <div class="carousel-track" id="carouselTrack">
+
+      <!-- SLIDE 1: SUPERBUTLER CENTER -->
+      <div class="carousel-slide">
+        <div class="project-row">
+          <div class="mockup-wrap">
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/superbutler-1.jpeg" alt="Superbutler Center screen 1" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/superbutler-2.jpeg" alt="Superbutler Center screen 2" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-num">01</div>
+            <div class="project-type">Hotel Operations App</div>
+            <div class="project-name">Superbutler Center</div>
+            <p class="project-desc">Staff-facing mobile app for service order management and operational tracking — shipped to both stores with structured logging that cut production debug time by ~40%.</p>
+            <div class="project-tags">
+              <span class="tag">React Native</span><span class="tag">REST APIs</span><span class="tag">Socket.IO</span><span class="tag">Client Logging</span>
+            </div>
+            <div class="store-links">
+              <a href="https://apps.apple.com/ca/app/superbutler-center/id6670790608" target="_blank" rel="noopener" class="store-badge">
+                <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=butlercenter.superbutler.ai" target="_blank" rel="noopener" class="store-badge">
+                <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.28.15.61.19.96.08l13.2-7.53-2.83-2.83-11.33 10.28zm-1.11-20.3C2.03 3.74 2 4.06 2 4.44v15.12c0 .38.03.7.07 1l11.51-11.5L2.07 3.46zM20.1 10.24l-2.76-1.57-3.16 3.16 3.16 3.16 2.79-1.59c.8-.45.8-1.71-.03-2.16zM4.14.25C3.8.15 3.46.18 3.18.33L14.54 11.7l2.83-2.83L4.14.25z"/></svg>
+                Google Play
+              </a>
+            </div>
           </div>
         </div>
-        <div class="skill-group reveal reveal-delay-1">
-          <div class="skill-group-title">Core Technologies</div>
-          <div class="skill-items">
-            <span class="skill-pill">React Native</span>
-            <span class="skill-pill">React.js</span><span class="skill-pill">Next.js</span>
-            <span class="skill-pill">Node.js</span><span class="skill-pill">TypeScript</span>
-            <span class="skill-pill">JavaScript (ES6+)</span>
+      </div>
+
+      <!-- SLIDE 2: RADIANT WORKFORCE -->
+      <div class="carousel-slide">
+        <div class="project-row reverse">
+          <div class="mockup-wrap">
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/radiant-1.png" alt="Radiant Workforce screen 1" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/radiant-2.png" alt="Radiant Workforce screen 2" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-num">02</div>
+            <div class="project-type">HRMS Mobile App</div>
+            <div class="project-name">Radiant Workforce</div>
+            <p class="project-desc">Offline-capable HRMS with geofence-enforced attendance — deployed for 200+ field employees. Maintains full functionality without connectivity and auto-syncs on reconnection.</p>
+            <div class="project-tags">
+              <span class="tag">React Native</span><span class="tag">Realm</span><span class="tag">Redux Toolkit</span><span class="tag">Geolocation API</span><span class="tag">Axios</span><span class="tag">HTML to PDF</span>
+            </div>
+            <div class="store-links">
+              <a href="https://apps.apple.com/us/app/rwf-radiant-workforce/id1583232157" target="_blank" rel="noopener" class="store-badge">
+                <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.softnology.rwfplus" target="_blank" rel="noopener" class="store-badge">
+                <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.28.15.61.19.96.08l13.2-7.53-2.83-2.83-11.33 10.28zm-1.11-20.3C2.03 3.74 2 4.06 2 4.44v15.12c0 .38.03.7.07 1l11.51-11.5L2.07 3.46zM20.1 10.24l-2.76-1.57-3.16 3.16 3.16 3.16 2.79-1.59c.8-.45.8-1.71-.03-2.16zM4.14.25C3.8.15 3.46.18 3.18.33L14.54 11.7l2.83-2.83L4.14.25z"/></svg>
+                Google Play
+              </a>
+            </div>
           </div>
         </div>
-        <div class="skill-group reveal reveal-delay-2">
-          <div class="skill-group-title">Integrations</div>
-          <div class="skill-items">
-            <span class="skill-pill">Stripe SDK</span><span class="skill-pill">Apple Pay</span>
-            <span class="skill-pill">Google Pay</span><span class="skill-pill">Socket.IO</span>
-            <span class="skill-pill">Agora</span><span class="skill-pill">Firebase</span>
-            <span class="skill-pill">REST APIs</span><span class="skill-pill">Axios</span>
+      </div>
+
+      <!-- SLIDE 3: REFTALK -->
+      <div class="carousel-slide">
+        <div class="project-row">
+          <div class="mockup-wrap">
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/reftalk-1.png" alt="Reftalk screen 1" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/reftalk-2.png" alt="Reftalk screen 2" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-num">03</div>
+            <div class="project-type">Sports Social Platform</div>
+            <div class="project-name">Reftalk</div>
+            <p class="project-desc">Live audio streaming and sports social platform with multi-provider wallet integration, real-time commentary engine, and cross-platform payment flows — published to both stores.</p>
+            <div class="project-tags">
+              <span class="tag">React Native</span><span class="tag">React.js</span><span class="tag">Stripe</span><span class="tag">Dolby</span><span class="tag">WebRTC</span>
+            </div>
+            <div class="store-links">
+              <a href="https://apps.apple.com/ie/app/ref-talk/id1617585097" target="_blank" rel="noopener" class="store-badge">
+                <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+            </div>
           </div>
         </div>
-        <div class="skill-group reveal reveal-delay-3">
-          <div class="skill-group-title">State &amp; Storage</div>
-          <div class="skill-items">
-            <span class="skill-pill">Redux Toolkit</span><span class="skill-pill">Context API</span>
-            <span class="skill-pill">Realm</span><span class="skill-pill">SQLite</span>
-            <span class="skill-pill">Firebase Firestore</span>
+      </div>
+
+      <!-- SLIDE 4: IIMIIN -->
+      <div class="carousel-slide">
+        <div class="project-row reverse">
+          <div class="mockup-wrap">
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/iimiin-1.png" alt="iimiin screen 1" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/iimiin-2.png" alt="iimiin screen 2" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-num">04</div>
+            <div class="project-type">Live Commerce App</div>
+            <div class="project-name">iimiin</div>
+            <p class="project-desc">Interactive live shopping platform with real-time video streaming, live bidding engine, and Stripe-powered checkout — architected for low-latency concurrent session handling.</p>
+            <div class="project-tags">
+              <span class="tag">React Native</span><span class="tag">Agora</span><span class="tag">Socket.IO</span><span class="tag">Stripe Connect</span><span class="tag">Kotlin</span>
+            </div>
+            <div class="store-links">
+              <a href="https://apps.apple.com/ca/app/iimiin/id6739402890" target="_blank" rel="noopener" class="store-badge">
+                <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.iimiin" target="_blank" rel="noopener" class="store-badge">
+                <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.28.15.61.19.96.08l13.2-7.53-2.83-2.83-11.33 10.28zm-1.11-20.3C2.03 3.74 2 4.06 2 4.44v15.12c0 .38.03.7.07 1l11.51-11.5L2.07 3.46zM20.1 10.24l-2.76-1.57-3.16 3.16 3.16 3.16 2.79-1.59c.8-.45.8-1.71-.03-2.16zM4.14.25C3.8.15 3.46.18 3.18.33L14.54 11.7l2.83-2.83L4.14.25z"/></svg>
+                Google Play
+              </a>
+            </div>
           </div>
         </div>
-        <div class="skill-group reveal">
-          <div class="skill-group-title">Languages</div>
-          <div class="skill-items">
-            <span class="skill-pill">JavaScript</span><span class="skill-pill">TypeScript</span>
-            <span class="skill-pill">Kotlin</span><span class="skill-pill">Java</span>
+      </div>
+
+      <!-- SLIDE 5: BIPLEE -->
+      <div class="carousel-slide">
+        <div class="project-row">
+          <div class="mockup-wrap">
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/biplee-1.png" alt="Biplee screen 1" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+            <div class="phone-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <img src="images/biplee-2.png" alt="Biplee screen 2" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:9/19;" loading="lazy" />
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-num">05</div>
+            <div class="project-type">Live Commerce App</div>
+            <div class="project-name">biplee</div>
+            <p class="project-desc">Live commerce app delivered against AWS-backed REST APIs — optimised Axios request pipelines for media-heavy payloads, maintaining smooth streaming UX under variable network conditions.</p>
+            <div class="project-tags">
+              <span class="tag">React Native</span><span class="tag">Axios</span><span class="tag">AWS</span><span class="tag">Redux Toolkit</span><span class="tag">WebRTC Streaming</span>
+            </div>
+            <div class="store-links">
+              <a href="https://apps.apple.com/us/app/biplee/id6450959332" target="_blank" rel="noopener" class="store-badge">
+                <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.biplee" target="_blank" rel="noopener" class="store-badge">
+                <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.28.15.61.19.96.08l13.2-7.53-2.83-2.83-11.33 10.28zm-1.11-20.3C2.03 3.74 2 4.06 2 4.44v15.12c0 .38.03.7.07 1l11.51-11.5L2.07 3.46zM20.1 10.24l-2.76-1.57-3.16 3.16 3.16 3.16 2.79-1.59c.8-.45.8-1.71-.03-2.16zM4.14.25C3.8.15 3.46.18 3.18.33L14.54 11.7l2.83-2.83L4.14.25z"/></svg>
+                Google Play
+              </a>
+            </div>
           </div>
         </div>
-        <div class="skill-group reveal reveal-delay-1">
-          <div class="skill-group-title">Tools &amp; Cloud</div>
-          <div class="skill-items">
-            <span class="skill-pill">Git / GitHub</span><span class="skill-pill">Azure DevOps</span>
-            <span class="skill-pill">Android Studio</span><span class="skill-pill">Xcode</span>
-            <span class="skill-pill">AWS S3</span><span class="skill-pill">VAPI AI</span>
-            <span class="skill-pill">Chatthing AI</span><span class="skill-pill">Claude Code</span>
+      </div>
+
+      <!-- SLIDE 6: SUPERBUTLER BACKOFFICE -->
+      <div class="carousel-slide">
+        <div class="project-row reverse">
+          <div class="mockup-wrap">
+            <div class="browser-mockup" style="width:100%">
+              <div class="browser-bar">
+                <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+                <div class="browser-url">backoffice.superbutler.ai</div>
+              </div>
+              <img src="images/backoffice.png" style="width:100%;display:block;" alt="SuperButler Backoffice dashboard" loading="lazy" />
+            </div>
           </div>
+          <div class="project-info">
+            <div class="project-num">06</div>
+            <div class="project-type">Dashboard · Web</div>
+            <div class="project-name">SuperButler Backoffice</div>
+            <p class="project-desc">Internal web dashboard with complete feature screens, state management, and .NET REST API integration — cutting frontend–backend handoff overhead significantly.</p>
+            <div class="project-tags">
+              <span class="tag">React.js</span><span class="tag">Redux</span><span class="tag">REST APIs</span><span class="tag">i18n</span><span class="tag">Localization</span>
+            </div>
+            <div class="store-links">
+              <a href="https://backoffice.superbutler.ai/login" target="_blank" rel="noopener" class="store-badge website">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                Visit Website
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: SUPERBUTLER MARKETING WEBSITE -->
+      <div class="carousel-slide">
+        <div class="project-row">
+          <div class="mockup-wrap">
+            <div class="browser-mockup" style="width:100%">
+              <div class="browser-bar">
+                <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+                <div class="browser-url">www.superbutler.ai</div>
+              </div>
+              <img src="images/superbutler.png" style="width:100%;display:block;" alt="Superbutler marketing website" loading="lazy" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-num">07</div>
+            <div class="project-type">Marketing Website</div>
+            <div class="project-name">Superbutler.ai</div>
+            <p class="project-desc">Dynamic marketing site built with Next.js, file-based routing, and CMS integration — enabling non-technical team members to publish content independently without developer involvement.</p>
+            <div class="project-tags">
+              <span class="tag">Next.js</span><span class="tag">CMS Integration</span><span class="tag">File-based Routing</span>
+            </div>
+            <div class="store-links">
+              <a href="https://www.superbutler.ai/" target="_blank" rel="noopener" class="store-badge website">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                Visit Website
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.carousel-track -->
+  </div><!-- /.carousel-viewport -->
+
+  <div class="carousel-dots" id="carouselDots"></div>
+  <p class="slide-counter" id="slideCounter"><span id="currentSlide">1</span> / <span id="totalSlides">7</span></p>
+</section>
+
+<!-- ─── SKILLS ─── -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">Technical Stack</div>
+    <h2 class="section-title reveal">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Mobile</div>
+        <div class="skill-items">
+          <span class="skill-pill">React Native</span><span class="skill-pill">iOS</span><span class="skill-pill">Android</span><span class="skill-pill">Native Modules</span><span class="skill-pill">Offline-first</span><span class="skill-pill">Performance Opt.</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-title">Core Technologies</div>
+        <div class="skill-items">
+          <span class="skill-pill">React Native</span><span class="skill-pill">React.js</span><span class="skill-pill">Next.js</span><span class="skill-pill">Node.js</span><span class="skill-pill">TypeScript</span><span class="skill-pill">JavaScript (ES6+)</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-2">
+        <div class="skill-group-title">Integrations</div>
+        <div class="skill-items">
+          <span class="skill-pill">Stripe SDK</span><span class="skill-pill">Apple Pay</span><span class="skill-pill">Google Pay</span><span class="skill-pill">Socket.IO</span><span class="skill-pill">Agora</span><span class="skill-pill">Firebase</span><span class="skill-pill">REST APIs</span><span class="skill-pill">Axios</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-3">
+        <div class="skill-group-title">State &amp; Storage</div>
+        <div class="skill-items">
+          <span class="skill-pill">Redux Toolkit</span><span class="skill-pill">Context API</span><span class="skill-pill">Realm</span><span class="skill-pill">SQLite</span><span class="skill-pill">Firebase Firestore</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-items">
+          <span class="skill-pill">JavaScript</span><span class="skill-pill">TypeScript</span><span class="skill-pill">Kotlin</span><span class="skill-pill">Java</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-title">Tools &amp; Cloud</div>
+        <div class="skill-items">
+          <span class="skill-pill">Git / GitHub</span><span class="skill-pill">Azure DevOps</span><span class="skill-pill">Android Studio</span><span class="skill-pill">Xcode</span><span class="skill-pill">AWS S3</span><span class="skill-pill">VAPI AI</span><span class="skill-pill">Chatthing AI</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <div class="contact-inner">
-        <div class="section-label reveal" style="justify-content: center">
-          Say Hello
-        </div>
-        <h2 class="section-title reveal" style="text-align: center">
-          Let's Work<br />Together
-        </h2>
-        <p class="reveal">
-          Open to exciting projects, full-time roles, and freelance
-          opportunities. Drop me a message — I reply fast.
-        </p>
-        <div class="contact-links reveal">
-          <a id="emailBtn" class="contact-link">✉
-            <span class="__cf_email__"
-              data-cfemail="107176716165753e7d757d7f7e222250777d71797c3e737f7d">[email&#160;protected]</span></a>
-          <!-- REPLACE with your real URLs -->
-          <a href="https://github.com/Afaque22" target="_blank" class="contact-link">⌥ GitHub</a>
-          <a href="https://linkedin.com/in/afaque-memon-7271aa1b3/" target="_blank" class="contact-link">↗ LinkedIn</a>
-          <a href="tel:+923157111838" class="contact-link">✆ +92 315 711 1838</a>
-          <a href="https://wa.me/923157111838" target="_blank" class="contact-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
-              style="vertical-align: middle; margin-right: 6px;">
-              <path
-                d="M20.52 3.48A11.9 11.9 0 0 0 12.06 0C5.46 0 .11 5.35.11 11.94c0 2.1.55 4.15 1.59 5.96L0 24l6.26-1.64a11.9 11.9 0 0 0 5.8 1.48h.01c6.6 0 11.95-5.35 11.95-11.94 0-3.2-1.25-6.21-3.5-8.42zM12.07 21.8a9.8 9.8 0 0 1-5-1.36l-.36-.21-3.72.97.99-3.62-.23-.37a9.83 9.83 0 0 1-1.52-5.24C2.23 6.22 6.65 1.8 12.07 1.8c2.6 0 5.04 1.01 6.88 2.85a9.66 9.66 0 0 1 2.85 6.87c0 5.42-4.42 9.8-9.73 9.8zm5.33-7.3c-.29-.15-1.7-.84-1.97-.94-.27-.1-.47-.15-.67.15-.2.29-.77.94-.94 1.13-.17.2-.35.22-.64.07-.29-.15-1.2-.44-2.28-1.4-.84-.75-1.4-1.68-1.56-1.97-.17-.29-.02-.45.13-.6.13-.13.29-.35.44-.52.15-.17.2-.29.29-.48.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.03 1-1.03 2.45s1.06 2.86 1.21 3.06c.15.2 2.08 3.18 5.04 4.46.7.3 1.24.48 1.67.61.7.22 1.34.19 1.85.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.25.17-1.36-.07-.11-.26-.18-.55-.33z" />
-            </svg>
-            WhatsApp
-          </a>
-        </div>
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="section-label reveal" style="justify-content:center">Say Hello</div>
+      <h2 class="section-title reveal" style="text-align:center">Let's Work<br/>Together</h2>
+      <p class="reveal">Open to exciting projects, full-time roles, and freelance opportunities. Drop me a message — I reply fast.</p>
+      <div class="contact-links reveal">
+        <a id="emailBtn" class="contact-link">✉ afaque.memon22@gmail.com</a>
+        <a href="https://github.com/Afaque22" target="_blank" rel="noopener" class="contact-link">⌥ GitHub</a>
+        <a href="https://linkedin.com/in/afaque-memon-7271aa1b3/" target="_blank" rel="noopener" class="contact-link">↗ LinkedIn</a>
+        <a href="tel:+923157111838" class="contact-link">✆ +92 315 711 1838</a>
+        <a href="https://wa.me/923157111838" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.9 11.9 0 0 0 12.06 0C5.46 0 .11 5.35.11 11.94c0 2.1.55 4.15 1.59 5.96L0 24l6.26-1.64a11.9 11.9 0 0 0 5.8 1.48h.01c6.6 0 11.95-5.35 11.95-11.94 0-3.2-1.25-6.21-3.5-8.42zM12.07 21.8a9.8 9.8 0 0 1-5-1.36l-.36-.21-3.72.97.99-3.62-.23-.37a9.83 9.83 0 0 1-1.52-5.24C2.23 6.22 6.65 1.8 12.07 1.8c2.6 0 5.04 1.01 6.88 2.85a9.66 9.66 0 0 1 2.85 6.87c0 5.42-4.42 9.8-9.73 9.8zm5.33-7.3c-.29-.15-1.7-.84-1.97-.94-.27-.1-.47-.15-.67.15-.2.29-.77.94-.94 1.13-.17.2-.35.22-.64.07-.29-.15-1.2-.44-2.28-1.4-.84-.75-1.4-1.68-1.56-1.97-.17-.29-.02-.45.13-.6.13-.13.29-.35.44-.52.15-.17.2-.29.29-.48.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.03 1-1.03 2.45s1.06 2.86 1.21 3.06c.15.2 2.08 3.18 5.04 4.46.7.3 1.24.48 1.67.61.7.22 1.34.19 1.85.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.25.17-1.36-.07-.11-.26-.18-.55-.33z"/></svg>
+          WhatsApp
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <p>Built with HTML · Hosted on GitHub Pages · © 2025 Afaque Ahmed</p>
-  </footer>
+<footer>
+  <p>Built with HTML · Hosted on GitHub Pages · © 2025 <span>Afaque Ahmed</span></p>
+</footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-  <script>
-    // ── reveal on scroll ──
-    const reveals = document.querySelectorAll(".reveal");
-    const revealObs = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) e.target.classList.add("visible");
-        }),
-      { threshold: 0.08 },
-    );
-    reveals.forEach((r) => revealObs.observe(r));
-    setTimeout(() => {
-      document
-        .querySelectorAll("#hero .reveal")
-        .forEach((el) => el.classList.add("visible"));
-    }, 100);
+<script>
+(function() {
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    // ── cursor ──
-    const cursor = document.getElementById("cursor");
-    const ring = document.getElementById("cursorRing");
-    let mx = 0,
-      my = 0,
-      rx = 0,
-      ry = 0;
-    document.addEventListener("mousemove", (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-      cursor.style.left = mx + "px";
-      cursor.style.top = my + "px";
+  // ── Scroll: nav shadow + back to top ──
+  const mainNav = document.getElementById('mainNav');
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    mainNav.classList.toggle('scrolled', y > 20);
+    btt.classList.toggle('visible', y > 400);
+  }, { passive: true });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ── Hamburger / mobile nav ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobLinks = mobileNav.querySelectorAll('.mob-link');
+
+  function closeMobileNav() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileNav.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    mobileNav.setAttribute('aria-hidden', String(!isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  mobLinks.forEach(link => link.addEventListener('click', closeMobileNav));
+
+  // ── Reveal on scroll ──
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => revealObs.observe(r));
+  setTimeout(() => {
+    document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
+  }, 100);
+
+  // ── Stat counter animation ──
+  const stats = document.querySelectorAll('.stat-num[data-target]');
+  const statsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      statsObs.unobserve(e.target);
+      const el = e.target;
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const val = Math.round(t * t * (3 - 2 * t) * target); // smooth step
+        el.textContent = val + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.5 });
+  stats.forEach(s => statsObs.observe(s));
+
+  // ── Nav scroll spy ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
+  const spyObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach(l => l.classList.remove('active'));
+      document.querySelectorAll(`a[href="#${entry.target.id}"]`)
+        .forEach(l => l.classList.add('active'));
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  sections.forEach(s => spyObs.observe(s));
+
+  // ── Cursor (desktop) ──
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  if (cursor && ring && !isMobile) {
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
     });
     (function animateRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + "px";
-      ring.style.top = ry + "px";
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
       requestAnimationFrame(animateRing);
     })();
+  }
 
-    // ── nav scroll spy ──
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll(".nav-links a");
-    new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const link = document.querySelector(
-            `.nav-links a[href="#${entry.target.id}"]`,
-          );
-          if (entry.isIntersecting) {
-            navLinks.forEach((l) => l.classList.remove("active"));
-            if (link) link.classList.add("active");
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
-    ).observe(
-      ...[...sections]
-        .filter((s) =>
-          document.querySelector(`.nav-links a[href="#${s.id}"]`),
-        )
-        .map((s) => (new IntersectionObserver(() => { }).disconnect(), s)),
-    );
+  // ── Carousel ──
+  const track = document.getElementById('carouselTrack');
+  const viewport = document.getElementById('carouselViewport');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsWrap = document.getElementById('carouselDots');
+  const currentSlideEl = document.getElementById('currentSlide');
+  const totalSlidesEl = document.getElementById('totalSlides');
+  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+  const total = slides.length;
+  let idx = 0;
 
-    // re-do spy properly
-    const spyObs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const link = document.querySelector(
-            `.nav-links a[href="#${entry.target.id}"]`,
-          );
-          if (entry.isIntersecting) {
-            navLinks.forEach((l) => l.classList.remove("active"));
-            if (link) link.classList.add("active");
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
-    );
-    sections.forEach((s) => {
-      if (document.querySelector(`.nav-links a[href="#${s.id}"]`))
-        spyObs.observe(s);
+  totalSlidesEl.textContent = total;
+
+  function slideW() { return viewport.offsetWidth; }
+
+  function goTo(i) {
+    idx = Math.max(0, Math.min(i, total - 1));
+    track.style.transform = `translateX(-${idx * slideW()}px)`;
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === total - 1;
+    dotsWrap.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    currentSlideEl.textContent = idx + 1;
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'dot' + (i === idx ? ' active' : '');
+      d.setAttribute('aria-label', `Go to project ${i + 1}`);
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
     });
+  }
 
-    // ══════════════════════════════
-    // CAROUSEL — one full slide at a time
-    // ══════════════════════════════
-    (() => {
-      const track = document.getElementById("carouselTrack");
-      const viewport = document.getElementById("carouselViewport");
-      const prevBtn = document.getElementById("prevBtn");
-      const nextBtn = document.getElementById("nextBtn");
-      const dotsWrap = document.getElementById("carouselDots");
-      const slides = Array.from(track.querySelectorAll(".carousel-slide"));
-      const total = slides.length;
-      let idx = 0;
+  prevBtn.addEventListener('click', () => goTo(idx - 1));
+  nextBtn.addEventListener('click', () => goTo(idx + 1));
 
-      function slideW() {
-        return viewport.offsetWidth;
-      }
-
-      function goTo(i) {
-        idx = Math.max(0, Math.min(i, total - 1));
-        track.style.transform = `translateX(-${idx * slideW()}px)`;
-        updateUI();
-      }
-
-      function buildDots() {
-        dotsWrap.innerHTML = "";
-        slides.forEach((_, i) => {
-          const d = document.createElement("button");
-          d.className = "dot" + (i === idx ? " active" : "");
-          d.setAttribute("aria-label", `Project ${i + 1}`);
-          d.addEventListener("click", () => goTo(i));
-          dotsWrap.appendChild(d);
-        });
-      }
-
-      function updateUI() {
-        prevBtn.disabled = idx === 0;
-        nextBtn.disabled = idx === total - 1;
-        dotsWrap
-          .querySelectorAll(".dot")
-          .forEach((d, i) => d.classList.toggle("active", i === idx));
-      }
-
-      prevBtn.addEventListener("click", () => goTo(idx - 1));
-      nextBtn.addEventListener("click", () => goTo(idx + 1));
-
-      // keyboard
-      document.addEventListener("keydown", (e) => {
-        if (
-          document.activeElement === document.body ||
-          document.activeElement === viewport
-        ) {
-          if (e.key === "ArrowLeft") {
-            e.preventDefault();
-            goTo(idx - 1);
-          }
-          if (e.key === "ArrowRight") {
-            e.preventDefault();
-            goTo(idx + 1);
-          }
-        }
-      });
-
-      // drag / swipe
-      let startX = 0,
-        dragging = false;
-      const getX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
-
-      viewport.addEventListener("mousedown", (e) => {
-        dragging = true;
-        startX = getX(e);
-        viewport.classList.add("dragging");
-      });
-      viewport.addEventListener(
-        "touchstart",
-        (e) => {
-          startX = getX(e);
-        },
-        { passive: true },
-      );
-
-      function onMove(e) {
-        if (!dragging && !e.touches) return;
-        const dx = getX(e) - startX;
-        track.style.transition = "none";
-        track.style.transform = `translateX(${-idx * slideW() + dx}px)`;
-      }
-
-      function onEnd(e) {
-        if (!dragging && !e.changedTouches) return;
-        dragging = false;
-        viewport.classList.remove("dragging");
-        track.style.transition = "";
-        const endX = e.changedTouches
-          ? e.changedTouches[0].clientX
-          : e.clientX;
-        const dx = endX - startX;
-        if (dx < -60) goTo(idx + 1);
-        else if (dx > 60) goTo(idx - 1);
-        else goTo(idx);
-      }
-
-      viewport.addEventListener("mousemove", onMove);
-      viewport.addEventListener("touchmove", onMove, { passive: true });
-      viewport.addEventListener("mouseup", onEnd);
-      viewport.addEventListener("touchend", onEnd);
-      viewport.addEventListener("mouseleave", (e) => {
-        if (dragging) onEnd(e);
-      });
-
-      // prevent link clicks firing on drag
-      track.addEventListener(
-        "click",
-        (e) => {
-          if (Math.abs((e.clientX || 0) - startX) > 8) e.preventDefault();
-        },
-        true,
-      );
-
-      // resize — recalculate offset without transition
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          track.style.transition = "none";
-          track.style.transform = `translateX(-${idx * slideW()}px)`;
-          setTimeout(() => {
-            track.style.transition = "";
-          }, 50);
-        }, 100);
-      });
-
-      buildDots();
-      goTo(0);
-    })();
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-    const email = "afaque.memon22@gmail.com";
-
-    function openMail(subject, body) {
-      const mobileMail = `mailto:${email}?subject=${subject}&body=${body}`;
-
-      const desktopMail =
-        `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
-
-      const url = isMobile ? mobileMail : desktopMail;
-
-      if (isMobile) {
-        window.location.href = url;
-      } else {
-        window.open(url, "_blank");
-      }
+  document.addEventListener('keydown', e => {
+    if (document.activeElement === document.body) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(idx - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(idx + 1); }
     }
+  });
 
-    // Button 1: Get in touch
-    document.getElementById("getInTouchBtn").addEventListener("click", (e) => {
-      e.preventDefault();
+  // drag / swipe
+  let startX = 0, dragging = false;
+  const getX = e => e.touches ? e.touches[0].clientX : e.clientX;
 
-      openMail(
-        "Project Inquiry",
-        "Hi,%0AI visited your portfolio and would like to discuss a project.%0A%0AThanks"
-      );
-    });
+  viewport.addEventListener('mousedown', e => { dragging = true; startX = getX(e); viewport.classList.add('dragging'); });
+  viewport.addEventListener('touchstart', e => { startX = getX(e); }, { passive: true });
 
-    // Button 2: Email link
-    document.getElementById("emailBtn").addEventListener("click", (e) => {
-      e.preventDefault();
+  function onMove(e) {
+    if (!dragging && !e.touches) return;
+    const dx = getX(e) - startX;
+    track.style.transition = 'none';
+    track.style.transform = `translateX(${-idx * slideW() + dx}px)`;
+  }
+  function onEnd(e) {
+    if (!dragging && !e.changedTouches) return;
+    dragging = false; viewport.classList.remove('dragging');
+    track.style.transition = '';
+    const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const dx = endX - startX;
+    if (dx < -50) goTo(idx + 1);
+    else if (dx > 50) goTo(idx - 1);
+    else goTo(idx);
+  }
 
-      openMail(
-        "Hello",
-        "Hi,%0AI came across your portfolio and wanted to connect.%0A%0AThanks"
-      );
-    });
-  </script>
+  viewport.addEventListener('mousemove', onMove);
+  viewport.addEventListener('touchmove', onMove, { passive: true });
+  viewport.addEventListener('mouseup', onEnd);
+  viewport.addEventListener('touchend', onEnd);
+  viewport.addEventListener('mouseleave', e => { if (dragging) onEnd(e); });
+  track.addEventListener('click', e => { if (Math.abs((e.clientX || 0) - startX) > 8) e.preventDefault(); }, true);
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      track.style.transition = 'none';
+      track.style.transform = `translateX(-${idx * slideW()}px)`;
+      setTimeout(() => { track.style.transition = ''; }, 50);
+    }, 100);
+  });
+
+  buildDots();
+  goTo(0);
+
+  // ── Email buttons ──
+  const email = 'afaque.memon22@gmail.com';
+  function openMail(subject, body) {
+    const url = isMobile
+      ? `mailto:${email}?subject=${subject}&body=${body}`
+      : `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+    isMobile ? (window.location.href = url) : window.open(url, '_blank');
+  }
+
+  document.getElementById('getInTouchBtn').addEventListener('click', e => {
+    e.preventDefault();
+    openMail('Project Inquiry', 'Hi,%0AI visited your portfolio and would like to discuss a project.%0A%0AThanks');
+  });
+  document.getElementById('emailBtn').addEventListener('click', e => {
+    e.preventDefault();
+    openMail('Hello', 'Hi,%0AI came across your portfolio and wanted to connect.%0A%0AThanks');
+  });
+
+})();
+</script>
 </body>
-
 </html>
